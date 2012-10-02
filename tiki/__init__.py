@@ -39,10 +39,24 @@ def disco(n):
         randomeyes()
         time.sleep(1)
 
+def init_head():
+    """
+    Unmap the mimics from the Digital Outputs so that they do not revert to D.O. state
+    """
+    requests.get('http://tiki.osirium.net/hid.spi?COM=CMD0;15:CMD1;15:CMD2;15:CMD3;15:')
+    time.sleep(0.5)
+    requests.get('http://tiki.osirium.net/hid.spi?COM=CMD4;15:CMD5;15:CMD6;15:CMD7;15:')
+
+
+
+
 
 def main():
     parser = argparse.ArgumentParser(description='Tiki command line')
     subparsers = parser.add_subparsers(title='action')
+
+    init_parser = subparsers.add_parser('init')
+    init_parser.set_defaults(func=init_head)
 
     snort_parser = subparsers.add_parser('snort')
     snort_parser.set_defaults(func=snort)
