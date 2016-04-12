@@ -3,41 +3,51 @@ import requests
 import argparse
 import random
 
+
 def snort():
     requests.get('http://tiki.osirium.net/hid.spi?COM=DI4:')
     time.sleep(1)
     requests.get('http://tiki.osirium.net/hid.spi?COM=DI5:')
 
+
 def eyes(lr, lg, lb, rr, rg, rb):
-    requests.get(
-        'http://tiki.osirium.net/hid.spi?COM=DM;0;{lr}:DM;1;{lg}:DM;2;{lb}:'.format(
-            lr=lr,
-            lg=lg,
-            lb=lb
+    # Maximum value for these is 63, anymore and it breaks with a stupid error
+    if max([lr, lg, lb, rr, rg, rb]) > 63:
+        print("Value out of range 0-63")
+    else:
+        requests.get(
+            'http://tiki.osirium.net/hid.spi?COM=DM;0;{lr}:DM;1;{lg}:DM;2;{lb}:'.format(
+                lr=lr,
+                lg=lg,
+                lb=lb
+            )
         )
-    )
-    requests.get(
-        'http://tiki.osirium.net/hid.spi?COM=DM;3;{rr}:DM;6;{rg}:DM;7;{rb}:'.format(
-            rr=rr,
-            rg=rg,
-            rb=rb
+        requests.get(
+            'http://tiki.osirium.net/hid.spi?COM=DM;3;{rr}:DM;6;{rg}:DM;7;{rb}:'.format(
+                rr=rr,
+                rg=rg,
+                rb=rb
+            )
         )
-    )
+
 
 def wink():
     eyes(63, 63, 63, 63, 63, 63)
     eyes(63, 63, 63, 0, 0, 0)
     eyes(63, 63, 63, 63, 63, 63)
 
+
 def randomeyes():
     lr, lg, lb = random.randint(0, 63), random.randint(0, 63), random.randint(0, 63)
     rr, rg, rb = random.randint(0, 63), random.randint(0, 63), random.randint(0, 63)
     eyes(lr, lg, lb, rr, rg, rb)
 
+
 def disco(n):
     for i in range(int(n)):
         randomeyes()
         time.sleep(1)
+
 
 def init_head():
     """
@@ -46,9 +56,6 @@ def init_head():
     requests.get('http://tiki.osirium.net/hid.spi?COM=CMD0;15:CMD1;15:CMD2;15:CMD3;15:')
     time.sleep(0.5)
     requests.get('http://tiki.osirium.net/hid.spi?COM=CMD4;15:CMD5;15:CMD6;15:CMD7;15:')
-
-
-
 
 
 def main():
