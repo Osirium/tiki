@@ -3,5 +3,7 @@ Tiki
 
 A Python library used to control Osirium's super awesome Tiki head, which you can see in action here: http://www.youtube.com/watch?v=h7W9P3Wnqho
 
+For help with the WebBrick commands see https://github.com/LawrenceK/webbrick/blob/master/Documentation/CommandSheet.pdf
+
 If you don't work for Osirium, this is of no use to you. Move along.
 
