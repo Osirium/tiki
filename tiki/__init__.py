@@ -4,10 +4,26 @@ import argparse
 import random
 
 
+def get(url):
+    """ Newer versions of requests throw ConnectionError whenever they talk to
+    a webrick :(
+    """
+    try:
+        requests.get(url)
+    except:
+        pass
+
+
 def snort():
-    requests.get('http://tiki.osirium.net/hid.spi?COM=DI4:')
+    try:
+        get('http://tiki.osirium.net/hid.spi?COM=DI4:')
+    except:
+        pass
     time.sleep(1)
-    requests.get('http://tiki.osirium.net/hid.spi?COM=DI5:')
+    try:
+        get('http://tiki.osirium.net/hid.spi?COM=DI5:')
+    except:
+        pass
 
 
 def eyes(lr, lg, lb, rr, rg, rb):
@@ -15,14 +31,14 @@ def eyes(lr, lg, lb, rr, rg, rb):
     if max([lr, lg, lb, rr, rg, rb]) > 63:
         print("Value out of range 0-63")
     else:
-        requests.get(
+        get(
             'http://tiki.osirium.net/hid.spi?COM=DM;0;{lr}:DM;1;{lg}:DM;2;{lb}:'.format(
                 lr=lr,
                 lg=lg,
                 lb=lb
             )
         )
-        requests.get(
+        get(
             'http://tiki.osirium.net/hid.spi?COM=DM;3;{rr}:DM;6;{rg}:DM;7;{rb}:'.format(
                 rr=rr,
                 rg=rg,
@@ -46,7 +62,7 @@ def randomeyes():
 def disco(n):
     for i in range(int(n)):
         randomeyes()
-        time.sleep(1)
+        time.sleep(0.3)
 
 
 def init_head():
