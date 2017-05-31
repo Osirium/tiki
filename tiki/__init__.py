@@ -28,7 +28,7 @@ def snort():
 
 def eyes(lr, lg, lb, rr, rg, rb):
     # Maximum value for these is 63, anymore and it breaks with a stupid error
-    if max([lr, lg, lb, rr, rg, rb]) > 63:
+    if max(map(int, [lr, lg, lb, rr, rg, rb])) > 63:
         print("Value out of range 0-63")
     else:
         get(
