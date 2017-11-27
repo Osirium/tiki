@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 VERSION="0.2"
 
 setup(
-    name="tiki",
+    name="osirium-tiki",
     version=VERSION,
 
     description="Tiki head controller",
