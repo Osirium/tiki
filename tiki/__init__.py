@@ -67,7 +67,11 @@ def disco(n):
 
 def init_head():
     """
-    Unmap the mimics from the Digital Outputs so that they do not revert to D.O. state
+    Unmap the mimics from the Digital Outputs so that they do not revert to
+    D.O. state.
+
+    This only needs to be run once, ever, the first time you set up a Webrick
+    to run a tiki head.
     """
     requests.get('http://tiki.osirium.net/hid.spi?COM=CMD0;15:CMD1;15:CMD2;15:CMD3;15:')
     time.sleep(0.5)
